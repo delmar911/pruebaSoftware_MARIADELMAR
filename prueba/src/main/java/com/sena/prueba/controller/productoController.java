@@ -1,9 +1,12 @@
 package com.sena.prueba.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,8 +44,8 @@ public class productoController {
 			if (producto.getCantidad()==0) {
 				return new ResponseEntity<>("La cantidad es obligatorio", HttpStatus.BAD_REQUEST);
 			}
-			if (producto.getPrecio()==0) {
-				return new ResponseEntity<>("El precio es obligatoria", HttpStatus.BAD_REQUEST);
+			if (producto.getPrecio().compareTo(BigDecimal.ZERO) == 0) {
+				return new ResponseEntity<>("El precio es obligatorio", HttpStatus.BAD_REQUEST);
 			}
 			if (producto.getPorcentaje_iva()==0) {
 				return new ResponseEntity<>("el iva es obligatorio", HttpStatus.BAD_REQUEST);
@@ -64,11 +67,11 @@ public class productoController {
 		return new ResponseEntity<>(Listaproducto, HttpStatus.OK);
 	}
 	
-	// @GetMapping("/busquedafiltro/{filtro}")
-	// public ResponseEntity<Object> findFiltro(@PathVariable String filtro){
-	// 	var Listaproducto=productoService.filtroproducto(filtro);
-	// 	return new ResponseEntity<>(Listaproducto, HttpStatus.OK);
-	// }
+	@GetMapping("/busquedafiltro/{filtro}")
+	public ResponseEntity<Object> findFiltro(@PathVariable String filtro){
+		var Listaproducto=productoService.filtroProducto(filtro);
+		return new ResponseEntity<>(Listaproducto, HttpStatus.OK);
+	}
 	
 	//@PathVariable : Recibe una variable por enlace
 		@GetMapping("/{id}")
@@ -78,11 +81,11 @@ public class productoController {
 			
 		}
 		
-		// @DeleteMapping("/eliminarPermanente/{id}")
-		// public ResponseEntity<Object> delete(@PathVariable String id){
-		// 	 productoService.delete(id);
-		// 			return new ResponseEntity<>("Registro Eliminado",HttpStatus.OK);
-		// }
+		@DeleteMapping("/eliminarPermanente/{id}")
+		public ResponseEntity<Object> delete(@PathVariable String id){
+			 productoService.delete(id);
+					return new ResponseEntity<>("Registro Eliminado",HttpStatus.OK);
+		}
 		// @DeleteMapping("/{id_producto}")
 		// public ResponseEntity<Object> delete(@PathVariable String id_producto){
 		// 	 productoService.delete(id_producto);
@@ -103,7 +106,7 @@ public class productoController {
             producto.setEstado(productoUpdate.getEstado());
             productoService.save(producto);
             
-            return new ResponseEntity<>(producto, HttpStatus.OK);
+            return new ResponseEntity<>("Se actualizo exitosamente", HttpStatus.OK);
 			
 			}
 			else {

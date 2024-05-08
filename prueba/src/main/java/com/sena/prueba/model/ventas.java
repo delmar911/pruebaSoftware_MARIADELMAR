@@ -1,36 +1,41 @@
 package com.sena.prueba.model;
 
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity(name="ventas")
 public class ventas {
+   
     @Id 
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name = "id_venta", nullable = false, length = 36)
 	private String id_venta;
 
-    @Column(name = "cliente", nullable = false, length = 36)
-	private String cliente;
-
-    @Column(name = "total", nullable = false, length = 36)
+    @Column(name = "total", nullable = false, length = 45)
 	private String total;
 
-    @Column(name = "fecha_venta", nullable = false, length = 36)
-	private Date fecha_venta;
+    @Column(name = "fecha_venta", nullable = false, length = 10)
+	private LocalDateTime fecha_venta;
 
-    @Column(name = "estado", nullable = false, length = 36)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado", nullable = false, length = 10)
 	private estado estado;
 
-    public ventas(String id_venta, String cliente, String total, Date fecha_venta,
-            com.sena.prueba.model.estado estado) {
+    @ManyToOne
+	@JoinColumn(name = "id_cliente")
+	private cliente cliente;
+
+    public ventas(String id_venta, String id_cliente, String total, LocalDateTime fecha_venta,
+            estado estado) {
         this.id_venta = id_venta;
-        this.cliente = cliente;
         this.total = total;
         this.fecha_venta = fecha_venta;
         this.estado = estado;
@@ -44,14 +49,7 @@ public class ventas {
         this.id_venta = id_venta;
     }
 
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-
+  
     public String getTotal() {
         return total;
     }
@@ -60,11 +58,11 @@ public class ventas {
         this.total = total;
     }
 
-    public Date getFecha_venta() {
+    public LocalDateTime getFecha_venta() {
         return fecha_venta;
     }
 
-    public void setFecha_venta(Date fecha_venta) {
+    public void setFecha_venta(LocalDateTime fecha_venta) {
         this.fecha_venta = fecha_venta;
     }
 

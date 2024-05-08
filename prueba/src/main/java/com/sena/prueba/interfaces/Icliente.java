@@ -12,7 +12,9 @@ import com.sena.prueba.model.cliente;
 public interface Icliente extends CrudRepository<cliente,String> {
     @Query("SELECT c FROM cliente c WHERE "
 			+ "c.nombres LIKE %?1% OR "
-			+ "c.cuidad LIKE %?1% ")
+			+ "c.cuidad LIKE %?1% OR "
+			+ "c.estado LIKE %?1% ")
 	
 	List<cliente> filtrocliente(String filtro);
+	
 }

@@ -2,6 +2,8 @@ package com.sena.prueba.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,7 +16,7 @@ public class cliente {
 	@Column(name = "id_cliente", nullable = false, length = 36)
 	private String id_cliente;
 
-    
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo_documento", nullable = false, length = 10)
 	private tipo_documento tipo_documento;
 
@@ -24,25 +26,30 @@ public class cliente {
     @Column (name = "nombres", nullable = false, length = 50)
 	private String nombres;
 
-	@Column(name = "apellidos", nullable = true, length = 50)
+	@Column(name = "apellidos", nullable = false, length = 50)
 	private String apellidos;
 
 	@Column(name = "telefono", nullable = false, length = 13)
 	private String telefono;
 
-	@Column(name = "direccion", nullable = true, length = 100)
+	@Column(name = "direccion", nullable = false, length = 100)
 	private String direccion;
+
+    @Column(name = "correo_electronico", nullable = false, length = 255)
+	private String correo_electronico;
 
 	@Column(name = "cuidad", nullable = false, length = 50)
 	private String cuidad;
 
-    
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false, length = 10)
 	private estado estado;
     
+    
+
     public cliente(String id_cliente, tipo_documento tipo_documento, String numero_documento, 
                     String nombres, String apellidos, String telefono, 
-                    String direccion, String cuidad, estado estado) {
+                    String direccion, String cuidad, estado estado, String correo_electronico) {
         this.id_cliente = id_cliente;
         this.tipo_documento = tipo_documento;
         this.numero_documento = numero_documento;
@@ -51,6 +58,7 @@ public class cliente {
         this.telefono = telefono;
         this.direccion = direccion;
         this.cuidad = cuidad;
+        this.correo_electronico=correo_electronico;
         this.estado = estado;
     }
 
@@ -117,7 +125,13 @@ public class cliente {
     public void setCuidad(String cuidad) {
         this.cuidad = cuidad;
     }
+    public String getCorreo_electronico() {
+		return correo_electronico;
+	}
 
+	public void setCorreo_electronico(String correo_electronico) {
+		this.correo_electronico = correo_electronico;
+	} 
     public estado getEstado() {
         return estado;
     }

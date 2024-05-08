@@ -1,7 +1,11 @@
 package com.sena.prueba.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,8 +28,8 @@ public class producto {
     @Column (name = "cantidad", nullable = false, length = 50)
 	private int cantidad;
 
-    @Column (name = "precio", nullable = false, length = 9)
-	private double precio;
+    @Column (name = "precio", nullable = false, precision = 9, scale = 2)
+	private BigDecimal precio;
 
     @Column (name = "porcentaje_iva", nullable = false, length = 2)
 	private int porcentaje_iva;
@@ -33,15 +37,18 @@ public class producto {
     @Column (name = "porcentaje_descuento", nullable = false, length = 2)
 	private int porcentaje_descuento;
     
-  
-
-
-   
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false, length = 10)
 	private estado estado;
 
-    public producto(String id_producto, String nombre, String descripcion, int cantidad, double precio, int porcentaje_iva, int porcentaje_descuento, estado estado) {
+    
+    public producto() {
+		
+	}
+    public producto(String id_producto, String nombre, String descripcion, 
+                    int cantidad, BigDecimal precio, int porcentaje_iva, 
+                    int porcentaje_descuento, estado estado) {
+       
         this.id_producto = id_producto;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -84,11 +91,11 @@ public class producto {
         this.cantidad = cantidad;
     }
 
-    public double getPrecio() {
+    public BigDecimal getPrecio() {
         return precio;
     }
-
-    public void setPrecio(double precio) {
+    
+    public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
 

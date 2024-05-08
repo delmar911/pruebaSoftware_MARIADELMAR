@@ -34,11 +34,11 @@ public class productoService implements IproductoService {
 		return Listaproducto;
 	}
 	
-	// @Override
-	// public List<producto> filtroproducto(String filtro) {
-	// 	List<producto>Listaproducto=data.filtroproducto(filtro);
-	// 	return Listaproducto;
-	// }
+	@Override
+	public List<producto> filtroProducto(String filtro) {
+		List<producto>Listaproducto=data.filtroProducto(filtro);
+		return Listaproducto;
+	}
 
 	// la variable que almacena los registros
 	// @Override
@@ -54,11 +54,11 @@ public class productoService implements IproductoService {
 		return producto;
 	}
 
-	// @Override
-	// public int delete(String id) {
-	// 	data.deleteById(id);
-	// 	return 1;
-	// }
+	@Override
+	public int delete(String id) {
+		data.deleteById(id);
+		return 1;
+	}
 	// @Override
 	// public int delete(String id_producto) {
 	// 	var producto=data.findById(id_producto).get();

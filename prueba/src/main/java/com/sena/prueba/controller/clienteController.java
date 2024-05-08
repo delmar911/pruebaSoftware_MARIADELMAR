@@ -54,6 +54,9 @@ public class clienteController {
 			if (cliente.getDireccion().equals("")) {
 				return new ResponseEntity<>("La dirección es obligatoria", HttpStatus.BAD_REQUEST);
 			}
+			if (cliente.getCorreo_electronico().equals("")) {
+				return new ResponseEntity<>("El correo electronico es obligatorio", HttpStatus.BAD_REQUEST);
+			}
 			if (cliente.getEstado().equals("")) {
 				return new ResponseEntity<>("El estado es obligatorio", HttpStatus.BAD_REQUEST);
 			}
@@ -103,8 +106,9 @@ public class clienteController {
 				cliente.setNombres(clienteUpdate.getNombres());
 				cliente.setDireccion(clienteUpdate.getDireccion());
 				cliente.setEstado(clienteUpdate.getEstado());
+				cliente.setCorreo_electronico(clienteUpdate.getCorreo_electronico());
 			    clienteService.save(cliente);
-			return new ResponseEntity<>(cliente, HttpStatus.OK);
+			return new ResponseEntity<>("Se actualizo exitosamente", HttpStatus.OK);
 			
 			}
 			else {
