@@ -23,23 +23,23 @@ public class cliente {
     @Column(name = "numero_documento", nullable = false, length = 10)
 	private String numero_documento;
 
-    @Column (name = "nombres", nullable = false, length = 50)
+    @Column (name = "nombres", nullable = false, length = 45)
 	private String nombres;
 
-	@Column(name = "apellidos", nullable = false, length = 50)
+	@Column(name = "apellidos", nullable = false, length = 45)
 	private String apellidos;
 
 	@Column(name = "telefono", nullable = false, length = 13)
 	private String telefono;
 
-	@Column(name = "direccion", nullable = false, length = 100)
+	@Column(name = "direccion", nullable = false, length = 45)
 	private String direccion;
 
-    @Column(name = "correo_electronico", nullable = false, length = 255)
+    @Column(name = "correo_electronico", nullable = false, length = 155)
 	private String correo_electronico;
 
-	@Column(name = "cuidad", nullable = false, length = 50)
-	private String cuidad;
+	@Column(name = "ciudad", nullable = false, length = 45)
+	private String ciudad;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false, length = 10)
@@ -49,7 +49,7 @@ public class cliente {
 
     public cliente(String id_cliente, tipo_documento tipo_documento, String numero_documento, 
                     String nombres, String apellidos, String telefono, 
-                    String direccion, String cuidad, estado estado, String correo_electronico) {
+                    String direccion, String ciudad, estado estado, String correo_electronico) {
         this.id_cliente = id_cliente;
         this.tipo_documento = tipo_documento;
         this.numero_documento = numero_documento;
@@ -57,7 +57,7 @@ public class cliente {
         this.apellidos = apellidos;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.cuidad = cuidad;
+        this.ciudad = ciudad;
         this.correo_electronico=correo_electronico;
         this.estado = estado;
     }
@@ -118,12 +118,12 @@ public class cliente {
         this.direccion = direccion;
     }
 
-    public String getCuidad() {
-        return cuidad;
+    public String getciudad() {
+        return ciudad;
     }
 
-    public void setCuidad(String cuidad) {
-        this.cuidad = cuidad;
+    public void setciudad(String ciudad) {
+        this.ciudad = ciudad;
     }
     public String getCorreo_electronico() {
 		return correo_electronico;

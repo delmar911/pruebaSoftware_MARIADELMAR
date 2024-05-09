@@ -10,8 +10,7 @@ import com.sena.prueba.model.producto;
 @Repository
 public interface Iproducto  extends CrudRepository<producto,String>{
     @Query("SELECT p FROM producto p WHERE "
-			+ "p.nombre LIKE %?1% OR "
-			+ "p.estado LIKE %?1% ")
+			+ "p.nombre LIKE %?1% ")
 	
 	List<producto> filtroProducto(String filtro);
 }

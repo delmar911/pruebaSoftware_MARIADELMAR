@@ -29,7 +29,7 @@ public class ventasController {
 	private IventasService ventasService;
 
     @PostMapping("/")
-   public ResponseEntity<Object> save(@ModelAttribute("ventas") ventas ventas){
+   	public ResponseEntity<Object> save(@ModelAttribute("ventas") ventas ventas){
 			// condicion para cuando ya exista el  registro 
 			//   List<ventas>listaventasValidacion=ventasService.filtroCedulaventas(ventas.getNumero_documento());
 			// if(listaventasValidacion.size()!=0){
@@ -39,10 +39,10 @@ public class ventasController {
 			// if (ventas.getTotal().equals("")) {
 			// 	return new ResponseEntity<>("El número de documento es obligatorio", HttpStatus.BAD_REQUEST);
 			// }
-			if (ventas.getFecha_venta().equals("")) {
+			if (ventas.getFecha_venta()==null) {
 				return new ResponseEntity<>("Ingrese la fecha de la venta", HttpStatus.BAD_REQUEST);
 			}
-			if (ventas.getEstado().equals("")) {
+			if (ventas.getEstado()==null) {
 				return new ResponseEntity<>("El estado es obligatorio", HttpStatus.BAD_REQUEST);
 			}
 			

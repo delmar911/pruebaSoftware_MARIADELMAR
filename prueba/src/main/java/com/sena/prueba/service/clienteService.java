@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sena.prueba.interfaceService.IclienteService;
 import com.sena.prueba.interfaces.Icliente;
 import com.sena.prueba.model.cliente;
+import com.sena.prueba.model.estado;
 
 @Service
 public class clienteService implements IclienteService{
@@ -37,10 +38,28 @@ public class clienteService implements IclienteService{
 		List<cliente>Listacliente=data.filtrocliente(filtro);
 		return Listacliente;
 	}
+	@Override
+	public List<cliente> filtroClientePorEstado(estado estado) {
+		List<cliente>Listacliente=data.filtroClientePorEstado(estado);
+		return Listacliente;
+	}
 	
     @Override
 	public Optional<cliente> findOne(String id) {
 		Optional<cliente> cliente=data.findById(id);
 		return cliente;
 	}
+	
+	@Override
+	public int delete(String id) {
+		data.deleteById(id);
+		return 1;
+	}
+	// @Override
+	// public int deletePermanente(String id_cliente) {
+	// 	var cliente = data.findById(id_cliente).get();
+	// 	cliente.setEstado(estado.Inactivo);
+	// 	data.save(cliente); 
+	// 	return 0;
+	// }
 }

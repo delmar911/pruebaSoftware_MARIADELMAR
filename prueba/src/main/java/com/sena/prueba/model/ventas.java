@@ -1,6 +1,9 @@
 package com.sena.prueba.model;
 
 import java.time.LocalDateTime;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -22,6 +25,7 @@ public class ventas {
     @Column(name = "total", nullable = false, length = 45)
 	private String total;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "fecha_venta", nullable = false, length = 10)
 	private LocalDateTime fecha_venta;
 

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sena.prueba.interfaceService.IclienteService;
 import com.sena.prueba.model.cliente;
+import com.sena.prueba.model.estado;
 
 @RequestMapping("/api/v1/cliente")
 @RestController
@@ -76,44 +78,51 @@ public class clienteController {
 		var Listacliente=clienteService.filtrocliente(filtro);
 		return new ResponseEntity<>(Listacliente, HttpStatus.OK);
 	}
+	@GetMapping("/estadofiltro/{filtro}")
+	public ResponseEntity<Object> filtroClientePorEstado(@PathVariable estado estado){
+		var Listacliente=clienteService.filtroClientePorEstado(estado);
+		return new ResponseEntity<>(Listacliente, HttpStatus.OK);
+	}
 	
-	//@PathVariable : Recibe una variable por enlace
-		@GetMapping("/{id}")
-		public ResponseEntity<Object> findOne(@PathVariable String id){
-			var cliente=clienteService.findOne(id);
-			return new ResponseEntity<>(cliente,HttpStatus.OK);
-			
-		}
+//@PathVariable : Recibe una variable por enlace
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> findOne(@PathVariable String id){
+		var cliente=clienteService.findOne(id);
+		return new ResponseEntity<>(cliente,HttpStatus.OK);
 		
-		// @DeleteMapping("/eliminarPermanente/{id}")
-		// public ResponseEntity<Object> delete(@PathVariable String id){
-		// 	 clienteService.delete(id);
-		// 			return new ResponseEntity<>("Registro Eliminado",HttpStatus.OK);
-		// }
-		// @DeleteMapping("/{id_cliente}")
-		// public ResponseEntity<Object> delete(@PathVariable String id_cliente){
-		// 	 clienteService.delete(id_cliente);
-		// 			return new ResponseEntity<>("Registro Deshabilitado",HttpStatus.OK);
-		// }
-		
+	}
+	
+	// @DeleteMapping("/eliminarPermanente/{id}")
+	// public ResponseEntity<Object> deletePermanente(@PathVariable String id){
+	// 		clienteService.delete(id);
+	// 			return new ResponseEntity<>("Registro Eliminado",HttpStatus.OK);
+	// }
+	@DeleteMapping("/{id_cliente}")
+	public ResponseEntity<Object> delete(@PathVariable String id_cliente){
+			clienteService.delete(id_cliente);
+				return new ResponseEntity<>("Registro Deshabilitado",HttpStatus.OK);
+	}
+	
 
-		@PutMapping("/{id}")
-		public ResponseEntity<Object> update(@PathVariable String id, @ModelAttribute("cliente")cliente clienteUpdate){
-			var cliente = clienteService.findOne(id).get();
-			if (cliente != null) {
-				cliente.setTipo_documento(clienteUpdate.getTipo_documento());
-				cliente.setNumero_documento(clienteUpdate.getNumero_documento());
-				cliente.setNombres(clienteUpdate.getNombres());
-				cliente.setDireccion(clienteUpdate.getDireccion());
-				cliente.setEstado(clienteUpdate.getEstado());
-				cliente.setCorreo_electronico(clienteUpdate.getCorreo_electronico());
-			    clienteService.save(cliente);
-			return new ResponseEntity<>("Se actualizo exitosamente", HttpStatus.OK);
-			
-			}
-			else {
-				return new ResponseEntity<>("Error cliente no encontrado",HttpStatus.BAD_REQUEST);
-			}
-				
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> update(@PathVariable String id, @ModelAttribute("cliente")cliente clienteUpdate){
+		var cliente = clienteService.findOne(id).get();
+		if (cliente != null) {
+			cliente.setTipo_documento(clienteUpdate.getTipo_documento());
+			cliente.setNumero_documento(clienteUpdate.getNumero_documento());
+			cliente.setNombres(clienteUpdate.getNombres());
+			cliente.setDireccion(clienteUpdate.getDireccion());
+			cliente.setTelefono(clienteUpdate.getTelefono());
+			cliente.setciudad(clienteUpdate.getciudad());
+			cliente.setEstado(clienteUpdate.getEstado());
+			cliente.setCorreo_electronico(clienteUpdate.getCorreo_electronico());
+			clienteService.save(cliente);
+		return new ResponseEntity<>("Se actualizo exitosamente", HttpStatus.OK);
+		
 		}
+		else {
+			return new ResponseEntity<>("Error cliente no encontrado",HttpStatus.BAD_REQUEST);
+		}
+			
+	}
 }
