@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sena.prueba.interfaceService.IventasService;
 import com.sena.prueba.model.ventas;
-
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -42,14 +40,17 @@ public class ventasController {
 			if (ventas.getFecha_venta()==null) {
 				return new ResponseEntity<>("Ingrese la fecha de la venta", HttpStatus.BAD_REQUEST);
 			}
-			if (ventas.getEstado()==null) {
+			if (ventas.getEstado().equals("")) {
 				return new ResponseEntity<>("El estado es obligatorio", HttpStatus.BAD_REQUEST);
+			}
+			if (ventas.getCliente().equals("")) {
+				return new ResponseEntity<>("El cliente es obligatorio", HttpStatus.BAD_REQUEST);
 			}
 			
 		ventasService.save(ventas);
 		return new ResponseEntity<>("Se guardo correctamente",HttpStatus.OK);
 	}
-    	@GetMapping("/")
+    @GetMapping("/")
 	public ResponseEntity<Object> findAll(){
 		var Listaventas=ventasService.findAll();
 		return new ResponseEntity<>(Listaventas, HttpStatus.OK);
@@ -78,13 +79,14 @@ public class ventasController {
             ventas.setTotal(ventasUpdate.getTotal());
             ventas.setFecha_venta(ventasUpdate.getFecha_venta());
             ventas.setEstado(ventasUpdate.getEstado());
+			ventas.setCliente(ventasUpdate.getCliente());
             ventasService.save(ventas);
             
             return new ResponseEntity<>("Se actualizo exitosamente", HttpStatus.OK);
 			
 			}
 			else {
-				return new ResponseEntity<>("Error producto no encontrado",HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>("Error venta no encontrado",HttpStatus.BAD_REQUEST);
 			}
 				
 		}

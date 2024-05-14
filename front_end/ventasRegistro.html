@@ -25,7 +25,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="stylesheet" href="css/estilos.css" />
-    <script src="js/ingreso.js"></script>
+    <script src="js/ventas.js"></script>
   </head>
   <body onload="CargarFormulario();">
     <!-- Topbar Start(Inicio de la barra superior) -->
@@ -94,81 +94,50 @@
     <!-- Navbar End -->
     <h2 class="registrarPacienteT">Registrar ventas</h2>
     <!-- from Star(fromulario inicio) -->
-    <!-- <form class="row g-3 needs-validation" novalidate> -->
-    <div class="row" style="margin-right: 0px;">
-      <div class="col-md-4">
+    <div class="" style="padding-left: 21rem;">
         <p><strong>Todos los campos que contengan (*) son obligatorios</strong> </p>
-    </div>
+    </div><!-- <form class="row g-3 needs-validation" novalidate> -->
+    <div class="row justify-content-center" >
       <div class="col-md-4">
-        <label for="fecha_ingreso" class="form-label">Fecha de Ingreso*</label>
-        <input
-          type="datetime-local"
-          class="form-control"
-          name="fecha_ingreso"
-          id="fecha_ingreso"
-          step="1"
-         
-        />
+        <label for="total" class="form-label">Total</label>
+        <input type="number" class="form-control" name="total" id="total" step="1" />
       </div>
       <div class="col-md-4">
-        <label for="fecha_salida" class="form-label">Fecha de Salida*</label>
+        <label for="fecha_venta" class="form-label">Fecha de la venta</label>
         <input
           type="datetime-local"
           class="form-control"
-          name="fecha_salida"
-          id="fecha_salida"
-          step="1"
+          name="fecha_venta"
+          id="fecha_venta"
+          step="1" onfocusout="validartotalventas(this);"
           />
           <!-- onfocusout="validarNumeroIdentificacion(this);"  -->
       </div>
       <div class="col-md-4">
-        <label for="habitacion" class="form-label">Número de Habitación*</label>
-        <input
-          type="number"
-          class="form-control"
-          name="habitacion"
-          id="habitacion"
-          onfocusout="validarNumeroHabitacion(this);"
-        />
-      </div>
-      <div class="col-md-4">
-        <label for="cama" class="form-label">Número de cama*</label>
-        <input type="number" class="form-control" name="cama" id="cama" />
-      </div>
-      <div class="col-md-4">
-        <label for="paciente" class="form-label">Paciente*</label>
-        <select name="paciente" id="paciente" class="form-select">
+        <label for="cliente" class="form-label">Cliente</label>
+        <select name="cliente" id="cliente" class="form-select">
           <option selected disabled value="">
-            Seleccione el paciente
+            Seleccione el cliente
           </option>
           <option value=""></option>
           <option value=""></option>
         </select>
       </div>
-      <div class="col-md-4">
-        <label for="medico" class="form-label">Médico*</label>
-        <select name="medico" id="medico" class="form-select">
-          <option selected disabled value="">
-            Seleccione el médico
-          </option>
-          <option value=""></option>
-          <option value=""></option>
-        </select>
-      </div>
+     
       <div class="col-md-4">
         <label for="estado" class="form-label">Estado*</label>
         <select name="estado" id="estado" class="form-select">
           <option selected disabled value="">
             ¿En qué estado se encuentra?...
           </option> 
-          <option value="Activo">Ingreso</option>
-          <option value="Inactivo">Alta Hospitalaria</option>
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
         </select>
       </div>
       <div class="col-12" style=" display: flex;justify-content: center;">
         <button
-          class="btn btn-primary"
-          onclick="registrarIngreso();"
+          class="btn btn-success"
+          onclick="registrarventas();"
           type="button" style="width: 200px;"
         >
           Registrar

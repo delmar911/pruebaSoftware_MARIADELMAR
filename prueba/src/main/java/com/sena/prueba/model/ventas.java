@@ -28,21 +28,33 @@ public class ventas {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "fecha_venta", nullable = false, length = 10)
 	private LocalDateTime fecha_venta;
+    
+    @ManyToOne
+	@JoinColumn(name = "cliente")
+	private cliente cliente;
 
+    
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false, length = 10)
 	private estado estado;
-
-    @ManyToOne
-	@JoinColumn(name = "id_cliente")
-	private cliente cliente;
-
-    public ventas(String id_venta, String id_cliente, String total, LocalDateTime fecha_venta,
-            estado estado) {
+    
+    
+    public ventas(String id_venta, cliente cliente, String total, LocalDateTime fecha_venta,
+    estado estado) {
         this.id_venta = id_venta;
         this.total = total;
         this.fecha_venta = fecha_venta;
         this.estado = estado;
+        
+    }
+    public ventas() {
+        
+    }
+    public cliente getCliente() {
+        return cliente;
+    }
+    public void setCliente(cliente cliente) {
+        this.cliente = cliente;
     }
 
     public String getId_venta() {
